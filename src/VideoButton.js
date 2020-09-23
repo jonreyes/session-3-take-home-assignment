@@ -8,13 +8,6 @@ class VideoButton extends React.Component {
         videoDescription: PropTypes.string.isRequired,
         index: PropTypes.number.isRequired,
         isSelected: PropTypes.bool.isRequired,
-        onClick: PropTypes.func.isRequired,
-    };
-
-    handleClick = () => {
-        if (!this.props.isSelected) {
-            this.props.onClick(this.props.index);
-        }
     };
 
     render() {
@@ -34,7 +27,6 @@ class VideoButton extends React.Component {
         return (
             <div
                 className={buttonClassName}
-                onClick={this.handleClick}
             >
                 <img src={`${videoImage}`} alt="" className="video-image" />
                     <div className="description">

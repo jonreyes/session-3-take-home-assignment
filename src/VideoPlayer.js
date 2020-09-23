@@ -7,22 +7,13 @@ import VideoList from './VideoList.js'
 class VideoPlayer extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            videos: [],
-            selectedVideoIndex: 0,
-        };
     }
 
-    handleVideoButtonClick = (index) => {
-        this.setState({ selectedVideoIndex: index });
-    };
 
     render() {
-        var { selectedVideoIndex } = this.state;
         var videos = videosList;
 
-        var id = getVideoIdFromPageUrl(videos[selectedVideoIndex].url);
+        var id = getVideoIdFromPageUrl(videos[0].url);
         console.log(videos);
 
         var rootClassName = 'container-section';
@@ -43,8 +34,7 @@ class VideoPlayer extends React.Component {
                 </div>
                 <VideoList
                         videos={videos}
-                        selectedVideoIndex={selectedVideoIndex}
-                        onVideoButtonClick={this.handleVideoButtonClick}
+                        selectedVideoIndex={0}
                 />
             </div>
         );

@@ -13,14 +13,12 @@ class VideoList extends React.Component {
             })
         ).isRequired,
         selectedVideoIndex: PropTypes.number.isRequired,
-        onVideoButtonClick: PropTypes.func.isRequired,
     };
 
     render() {
         var {
             videos,
             selectedVideoIndex,
-            onVideoButtonClick,
         } = this.props;
 
         return (
@@ -37,7 +35,6 @@ class VideoList extends React.Component {
                                 videoDescription={description}
                                 index={index}
                                 isSelected={isSelected}
-                                onClick={onVideoButtonClick}
                             />
                         );
                     })

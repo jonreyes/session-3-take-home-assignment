@@ -815,8 +815,8 @@
           return index.toString(36);
         }
         function forEachSingleChild(bookKeeping, child, name) {
-          var func3 = bookKeeping.func, context = bookKeeping.context;
-          func3.call(context, child, bookKeeping.count++);
+          var func = bookKeeping.func, context = bookKeeping.context;
+          func.call(context, child, bookKeeping.count++);
         }
         function forEachChildren(children, forEachFunc, forEachContext) {
           if (children == null) {
@@ -827,8 +827,8 @@
           releaseTraverseContext(traverseContext);
         }
         function mapSingleChildIntoContext(bookKeeping, child, childKey) {
-          var result = bookKeeping.result, keyPrefix = bookKeeping.keyPrefix, func3 = bookKeeping.func, context = bookKeeping.context;
-          var mappedChild = func3.call(context, child, bookKeeping.count++);
+          var result = bookKeeping.result, keyPrefix = bookKeeping.keyPrefix, func = bookKeeping.func, context = bookKeeping.context;
+          var mappedChild = func.call(context, child, bookKeeping.count++);
           if (Array.isArray(mappedChild)) {
             mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, function(c) {
               return c;
@@ -840,21 +840,21 @@
             result.push(mappedChild);
           }
         }
-        function mapIntoWithKeyPrefixInternal(children, array, prefix, func3, context) {
+        function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
           var escapedPrefix = "";
           if (prefix != null) {
             escapedPrefix = escapeUserProvidedKey(prefix) + "/";
           }
-          var traverseContext = getPooledTraverseContext(array, escapedPrefix, func3, context);
+          var traverseContext = getPooledTraverseContext(array, escapedPrefix, func, context);
           traverseAllChildren(children, mapSingleChildIntoContext, traverseContext);
           releaseTraverseContext(traverseContext);
         }
-        function mapChildren(children, func3, context) {
+        function mapChildren(children, func, context) {
           if (children == null) {
             return children;
           }
           var result = [];
-          mapIntoWithKeyPrefixInternal(children, result, null, func3, context);
+          mapIntoWithKeyPrefixInternal(children, result, null, func, context);
           return result;
         }
         function countChildren(children) {
@@ -2394,10 +2394,10 @@
             throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
           }
         }
-        var invokeGuardedCallbackImpl = function(name, func3, context, a, b, c, d, e, f) {
+        var invokeGuardedCallbackImpl = function(name, func, context, a, b, c, d, e, f) {
           var funcArgs = Array.prototype.slice.call(arguments, 3);
           try {
-            func3.apply(context, funcArgs);
+            func.apply(context, funcArgs);
           } catch (error2) {
             this.onError(error2);
           }
@@ -2405,7 +2405,7 @@
         {
           if (typeof window !== "undefined" && typeof window.dispatchEvent === "function" && typeof document !== "undefined" && typeof document.createEvent === "function") {
             var fakeNode = document.createElement("react");
-            var invokeGuardedCallbackDev = function(name, func3, context, a, b, c, d, e, f) {
+            var invokeGuardedCallbackDev = function(name, func, context, a, b, c, d, e, f) {
               if (!(typeof document !== "undefined")) {
                 {
                   throw Error("The `document` global was defined when React was initialized, but is not defined anymore. This can happen in a test environment if a component schedules an update from an asynchronous callback, but the test has already finished running. To solve this, you can either unmount the component at the end of your test (and ensure that any asynchronous operations get canceled in `componentWillUnmount`), or you can change the test itself to be asynchronous.");
@@ -2421,7 +2421,7 @@
                 if (typeof window.event !== "undefined" && window.hasOwnProperty("event")) {
                   window.event = windowEvent;
                 }
-                func3.apply(context, funcArgs);
+                func.apply(context, funcArgs);
                 didError = false;
               }
               var error2;
@@ -2474,12 +2474,12 @@
             caughtError = error2;
           }
         };
-        function invokeGuardedCallback(name, func3, context, a, b, c, d, e, f) {
+        function invokeGuardedCallback(name, func, context, a, b, c, d, e, f) {
           hasError = false;
           caughtError = null;
           invokeGuardedCallbackImpl$1.apply(reporter, arguments);
         }
-        function invokeGuardedCallbackAndCatchFirstError(name, func3, context, a, b, c, d, e, f) {
+        function invokeGuardedCallbackAndCatchFirstError(name, func, context, a, b, c, d, e, f) {
           invokeGuardedCallback.apply(this, arguments);
           if (hasError) {
             var error2 = clearCaughtError();
@@ -4013,15 +4013,15 @@
           }
           return parentNamespace;
         }
-        var createMicrosoftUnsafeLocalFunction = function(func3) {
+        var createMicrosoftUnsafeLocalFunction = function(func) {
           if (typeof MSApp !== "undefined" && MSApp.execUnsafeLocalFunction) {
             return function(arg0, arg1, arg2, arg3) {
               MSApp.execUnsafeLocalFunction(function() {
-                return func3(arg0, arg1, arg2, arg3);
+                return func(arg0, arg1, arg2, arg3);
               });
             };
           } else {
-            return func3;
+            return func;
           }
         };
         var reusableSVGContainer;
@@ -19965,13 +19965,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
       videoImage: PropTypes.string.isRequired,
       videoDescription: PropTypes.string.isRequired,
       index: PropTypes.number.isRequired,
-      isSelected: PropTypes.bool.isRequired,
-      onClick: PropTypes.func.isRequired
-    };
-    handleClick = () => {
-      if (!this.props.isSelected) {
-        this.props.onClick(this.props.index);
-      }
+      isSelected: PropTypes.bool.isRequired
     };
     render() {
       var {
@@ -19985,8 +19979,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         buttonClassName = "video selected";
       }
       return React2.createElement("div", {
-        className: buttonClassName,
-        onClick: this.handleClick
+        className: buttonClassName
       }, React2.createElement("img", {
         src: `${videoImage}`,
         alt: "",
@@ -20009,14 +20002,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         url: PropTypes2.string.isRequired,
         img: PropTypes2.string.isRequired
       })).isRequired,
-      selectedVideoIndex: PropTypes2.number.isRequired,
-      onVideoButtonClick: PropTypes2.func.isRequired
+      selectedVideoIndex: PropTypes2.number.isRequired
     };
     render() {
       var {
         videos,
-        selectedVideoIndex,
-        onVideoButtonClick
+        selectedVideoIndex
       } = this.props;
       return React3.createElement("div", {
         className: "video-list"
@@ -20028,8 +20019,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           videoImage: img,
           videoDescription: description,
           index,
-          isSelected,
-          onClick: onVideoButtonClick
+          isSelected
         });
       }));
     }
@@ -20041,18 +20031,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   class VideoPlayer2 extends React4.Component {
     constructor(props) {
       super(props);
-      this.state = {
-        videos: [],
-        selectedVideoIndex: 0
-      };
     }
-    handleVideoButtonClick = (index) => {
-      this.setState({selectedVideoIndex: index});
-    };
     render() {
-      var {selectedVideoIndex} = this.state;
       var videos = videosList;
-      var id = getVideoIdFromPageUrl(videos[selectedVideoIndex].url);
+      var id = getVideoIdFromPageUrl(videos[0].url);
       console.log(videos);
       var rootClassName = "container-section";
       return React4.createElement("div", {
@@ -20070,8 +20052,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         allowFullScreen: true
       })), React4.createElement(VideoList_default, {
         videos,
-        selectedVideoIndex,
-        onVideoButtonClick: this.handleVideoButtonClick
+        selectedVideoIndex: 0
       }));
     }
   }
