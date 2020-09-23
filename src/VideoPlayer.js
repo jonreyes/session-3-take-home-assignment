@@ -12,8 +12,9 @@ class VideoPlayer extends React.Component {
 
     render() {
         var videos = videosList;
+        var selectedVideoIndex = 0;
 
-        var id = getVideoIdFromPageUrl(videos[0].url);
+        var id = getVideoIdFromPageUrl(videos[selectedVideoIndex].url);
         console.log(videos);
 
         var rootClassName = 'container-section';
@@ -34,7 +35,7 @@ class VideoPlayer extends React.Component {
                 </div>
                 <VideoList
                         videos={videos}
-                        selectedVideoIndex={0}
+                        selectedVideoIndex={selectedVideoIndex}
                 />
             </div>
         );

@@ -1,3 +1,4 @@
+// Get the id from the video URL in constants.js
 export var getVideoIdFromPageUrl = (url) => {
     var testString = 'vimeo.com/';
     var testStringStart = url.indexOf(testString);

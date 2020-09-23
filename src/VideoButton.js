@@ -1,16 +1,9 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 
 class VideoButton extends React.Component {
-    static propTypes = {
-        videoTitle: PropTypes.string.isRequired,
-        videoImage: PropTypes.string.isRequired,
-        videoDescription: PropTypes.string.isRequired,
-        index: PropTypes.number.isRequired,
-        isSelected: PropTypes.bool.isRequired,
-    };
 
     render() {
+      // Get the required props to be used in this component
         var {
             videoTitle,
             videoImage,
@@ -23,6 +16,8 @@ class VideoButton extends React.Component {
         if (isSelected) {
             buttonClassName = 'video selected';
         }
+        
+      // Make sure you pass the right prop values in the blanks provided
 
         return (
             <div
