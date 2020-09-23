@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
-import VideoPlayer from './VideoPlayer.js';
+// Import VideoPlayer.js file here and render it the screen
 
-ReactDOM.render(<VideoPlayer />, document.getElementById('root'));
+// Comment out the below line and replace Component with your imported component 
+// ReactDOM.render(<Component>, document.getElementById('root'));

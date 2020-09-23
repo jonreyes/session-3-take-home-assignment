@@ -41,4 +41,4 @@ class VideoPlayer extends React.Component {
     }
 }
 
-export default VideoPlayer;
+// Export VideoPlayer here - Refer to the hands-on exercises taught in the class

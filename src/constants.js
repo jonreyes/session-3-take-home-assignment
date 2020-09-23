@@ -1,3 +1,5 @@
+// This file contains the list of videos. Understand the structure of the array of objects here
+
 export var videosList = [
     {
         title: 'Hello',

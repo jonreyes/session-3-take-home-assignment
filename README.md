@@ -14,6 +14,7 @@ The VideoList component renders a collection of VideoButton components.
 
 The VideoButton component renders an element that allows the user to select a video.
 
+Refer **Solution-Image.PNG** for how the final solution should look
 
 ## Exercise 1 - `/src/utilities.js`
 * This file contains a number of opportunities for additional challenges after completing the base exercise, but at first, the only part of this file that needs to be changed is the `getVideoIdFromPageUrl` function.

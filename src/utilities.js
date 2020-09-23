@@ -1,11 +1,4 @@
-export var getVideoIdFromPageUrl = (url) => {
-    var testString = 'vimeo.com/';
-    var testStringStart = url.indexOf(testString);
-    var idStart = testStringStart + testString.length;
-    var idEnd = Math.max(0, url.indexOf('/', idStart)) || url.length;
-    var id = url.slice(idStart, idEnd);
-    if (testStringStart === -1 || idStart === url.length || isNaN(Number(id))) {
-        return '';
-    }
-    return id;
+// Make sure to return the id value from the url that will be passed to this utility function
+export var getVideoIdFromPageUrl = () => {
+  
 };

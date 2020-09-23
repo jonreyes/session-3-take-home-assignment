@@ -1,19 +1,7 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import VideoButton from './VideoButton.js';
 
 class VideoList extends React.Component {
-    static propTypes = {
-        videos: PropTypes.arrayOf(
-            PropTypes.shape({
-                title: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired,
-                url: PropTypes.string.isRequired,
-                img: PropTypes.string.isRequired,
-            })
-        ).isRequired,
-        selectedVideoIndex: PropTypes.number.isRequired,
-    };
 
     render() {
         var {
@@ -26,15 +14,15 @@ class VideoList extends React.Component {
                 {
                     videos.map(({ id, title, description, img }, index) => {
                         var isSelected = index === selectedVideoIndex;
-
+                        // Pass all the required props into VideoButton component
                         return (
                             <VideoButton
-                                key={`${id}-${index}`}
-                                videoTitle={title}
-                                videoImage={img}
-                                videoDescription={description}
-                                index={index}
-                                isSelected={isSelected}
+                                key={}
+                                videoTitle={}
+                                videoImage={}
+                                videoDescription={}
+                                index={}
+                                isSelected={}
                             />
                         );
                     })
@@ -44,5 +32,5 @@ class VideoList extends React.Component {
     }
 }
 
-export default VideoList;
+// Export VideoList here
 
