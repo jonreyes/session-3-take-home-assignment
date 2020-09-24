@@ -1,6 +1,6 @@
 // This file contains the list of videos. Understand the structure of the array of objects here
 
-export var videosList = [
+export default videosList = [
     {
         title: 'Hello',
         description: 'Made by Matthijs Vlot',

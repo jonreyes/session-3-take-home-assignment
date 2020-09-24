@@ -1,36 +1,43 @@
 import * as React from 'react';
 import VideoButton from './VideoButton.js';
+import getVideoIdFromPageUrl from './utilities.js';
 
 class VideoList extends React.Component {
+    constructor(props){
+      super(props);
+    }
 
     render() {
-        var {
-            videos,
-            selectedVideoIndex,
-        } = this.props;
-
+        let {
+          videos,
+          selectedVideoIndex
+          } = this.props; 
+        //console.log(videos);   
         return (
             <div className="video-list">
-                {
-                    videos.map(({ id, title, description, img }, index) => {
-                        var isSelected = index === selectedVideoIndex;
-                        // Pass all the required props into VideoButton component
-                        return (
-                            <VideoButton
-                                key={}
-                                videoTitle={}
-                                videoImage={}
-                                videoDescription={}
-                                index={}
-                                isSelected={}
-                            />
-                        );
-                    })
+            {
+              videos.map(
+              ({title,description,img,url},index)=>{
+                const id = getVideoIdFromPageUrl(url);
+                var isSelected = index === selectedVideoIndex;
+                return(
+                  <VideoButton
+                  key={id}
+                  select={this.props.select}
+                  videoTitle={title}
+                  videoImage={img}
+                  videoDescription={description}
+                  index={index}
+                  isSelected={isSelected}
+                  />
+                );
                 }
+              )
+            }
             </div>
         );
     }
 }
 
 // Export VideoList here
-
+export default VideoList;

@@ -1,21 +1,24 @@
 import * as React from 'react';
-import { getVideoIdFromPageUrl } from './utilities.js';
-import { videosList } from "./constants";
+import getVideoIdFromPageUrl from './utilities.js';
+import videosList from "./constants.js";
 import VideoList from './VideoList.js'
-
 
 class VideoPlayer extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+          selected: 0
+        };
     }
 
+    select = (s)=>{
+      this.setState({selected:s})
+      console.log(this.state.selected);
+    };
 
     render() {
         var videos = videosList;
-
-        var id = getVideoIdFromPageUrl(videos[0].url);
-        console.log(videos);
-
+        var id = getVideoIdFromPageUrl(videos[this.state.selected].url);
         var rootClassName = 'container-section';
 
         return (
@@ -35,6 +38,7 @@ class VideoPlayer extends React.Component {
                 <VideoList
                         videos={videos}
                         selectedVideoIndex={0}
+                        select={this.select}
                 />
             </div>
         );
@@ -42,3 +46,5 @@ class VideoPlayer extends React.Component {
 }
 
 // Export VideoPlayer here - Refer to the hands-on exercises taught in the class
+
+export default VideoPlayer;
